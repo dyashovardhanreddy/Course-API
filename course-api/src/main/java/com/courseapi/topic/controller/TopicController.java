@@ -1,8 +1,10 @@
-package com.springboottutorial.controller;
+package com.courseapi.topic.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.springboottutorial.model.Topic;
-import com.springboottutorial.service.TopicService;
+import com.courseapi.topic.model.Topic;
+import com.courseapi.topic.service.TopicService;
 
 @RestController
 public class TopicController {
@@ -31,7 +33,7 @@ public class TopicController {
 	}
 	
 	@RequestMapping("/topics/{id}")
-	public Topic getTopic(@PathVariable("id") String id){
+	public Topic getTopic(@PathVariable("id") int id){
 		return topicService.getTopic(id);
 	}
 	
@@ -41,12 +43,12 @@ public class TopicController {
 	}
 	
 	@DeleteMapping("/topics/{id}")
-	public void deleteTopic(@PathVariable String id) {
-		topicService.deleteTopic(id);
+	public ResponseEntity<String> deleteTopic(@PathVariable int id) {
+		return topicService.deleteTopic(id);
 	}
 	
 	@PutMapping("/topics/{id}")
-	public void updateTopic(@PathVariable String id,@RequestBody Topic topic) {
-		topicService.updateTopic(topic, id);
+	public void updateTopic(@PathVariable int id,@RequestBody Topic topic) {
+		topicService.updateTopic(topic);
 	}
 }
